@@ -1,0 +1,56 @@
+어노테이션 (@xxxx) 
+   -> 사전적 의미로는 주석이라는 뜻을 가지고 있다.
+   -> 특별한 의미 혹은 기능을 수행하는 의미를 가지고 있으며 프로그램에 제공하는 메타데이터라 할 수 있다.
+   ex) 컴파일러에게 코드 작성 문법 에러를 체크하도록 정보 제공, 실행 시 특정 기능을 실행하도록 정보를 제공 ...
+
+
+Reflection
+  -> 프로그램이 실행 중에 자신의 구조와 동작을 검사하고 조사하고 수정하는 것.
+  -> 이 것을 사용하면 인터페이스, 필드, 메소드 이름을 몰라도 모두 접근이 가능하다.
+  
+  
+  
+@Componenet
+  -> 개발자가 개발한 Class를 Bean에 등록하기 위한 어노테이션 
+  
+  // 클래스 이름을 Bean의 ID로 사용한 경우
+  @Component
+  public class student() {
+    public student () {
+      System.out.println("TEST");
+    }
+  }
+  
+  // Bean 의 ID를 value 값에 지정한 경우
+  @Component(value="my_student")
+  public class student() {
+    public student () {
+      System.out.println("TEST");
+    }
+  }
+  
+@Bean
+  -> 개발자가 직접 제어가 불가능한 외부 라이브러리를 Bean으로 만들려고 할 때 사용
+  -> 라이브러리를 Bean으로 등록하기 위해서는 해당 라이브러리 객체를 반환하는 Method를 만들고 Bean 어노테이션을 사용하면된다.
+  
+// ArratList 라이브러리를 사용하기 위해 만든 객체
+// Bean 에 따로 Value가 존재하지 않기 떄문에 Class 이름을 Bean ID 로 사용 (camelcase 변경됨) ->applicationConfig가 ID 가 될것
+@Configuration
+public class ApplicationConfig {    
+    @Bean
+    public ArrayList<String> array(){
+        return new ArrayList<String>();
+    }   
+}
+
+// Bean 에 설정한 value 값이 곧 Bean ID 가 된다.
+@Configuration
+public class ApplicationConfig {    
+    @Bean(name="myarray")
+    public ArrayList<String> array(){
+        return new ArrayList<String>();
+    }   
+}
+
+@Autowired
+  -> 속성, setter, 생성자에서 사용되며 Type 에 따라 Bean 을 주입.
